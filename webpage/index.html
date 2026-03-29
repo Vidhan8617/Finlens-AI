@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FinLens AI</title>
+  <link rel="stylesheet" href="/webpage/style.css"/>
+</head>
+<body>
+
+<header>
+  <div style="flex:1">
+    <h1>FinLens AI <span class="badge"></span></h1>
+    <p>Intelligent Financial Document Extraction Pipeline</p>
+  </div>
+
+  <div style="display:flex; align-items:center; justify-content:center; flex:1;">
+    <img
+      src="/webpage/logo.png"
+      alt="VIT Bhopal"
+      style="height:52px; object-fit:contain; filter:brightness(0) invert(1);"
+    />
+  </div>
+
+  <div style="flex:1; text-align:right; opacity:0.75; font-size:13px; line-height:1.7">
+    <div style="font-weight:600; font-size:14px;">Made by Vidhan Ayachit</div>
+    <div>Reg No: 23BAI10233</div>
+  </div>
+</header>
+
+<main>
+
+  <div class="upload-card" id="upload-area">
+    <div class="upload-icon">
+      <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" width="40" height="40" alt="PDF"/>
+    </div>
+    <h2>Upload Annual Report</h2>
+    <p>Drag & drop your PDF here, or click to browse</p>
+    <label class="upload-btn" for="file-input">Choose PDF File</label>
+    <input type="file" id="file-input" accept=".pdf"/>
+  </div>
+
+  <div id="loading">
+    <div class="spinner"></div>
+    <p id="loading-text">Analyzing your document...</p>
+  </div>
+
+  <div id="error-msg"></div>
+
+  <div id="results">
+
+    <div class="result-header">
+      <h2><span class="success-dot"></span><span id="res-filename">report.pdf</span></h2>
+      <span id="res-time"></span>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="value" id="stat-pages" style="color:#4A90D9">—</div>
+        <div class="label">Total Pages</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="stat-text-pages" style="color:#27AE60">—</div>
+        <div class="label">Text Pages</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="stat-figures" style="color:#8E44AD">—</div>
+        <div class="label">Figures Found</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" style="color:#27AE60; font-size:18px; font-weight:600;">Done</div>
+        <div class="label">Status</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Extracted Financial Figures</h3>
+        <div id="figures-list"></div>
+      </div>
+      <div class="card">
+        <h3>PDF First Page Preview</h3>
+        <img id="pdf-preview" class="preview-img" src="" alt="PDF preview"/>
+      </div>
+    </div>
+
+    <div class="chart-card" id="chart-section">
+      <h3>Visual Analysis</h3>
+      <img id="chart-img" src="" alt="Financial chart"/>
+    </div>
+
+    <button class="again-btn" onclick="resetUI()">&#8592; Analyze Another PDF</button>
+
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-item">
+      <span class="footer-label">Course</span>
+      <span class="footer-value">Computer Vision</span>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-item">
+      <span class="footer-label">Course Code</span>
+      <span class="footer-value">CSE3010</span>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-item">
+      <span class="footer-label">Faculty</span>
+      <span class="footer-value">Dr. Amrita Parashar</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/webpage/app.js"></script>
+</body>
+</html>
