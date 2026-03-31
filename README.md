@@ -55,22 +55,25 @@ git clone https://github.com/Vidhan8617/Finlens-AI.git
 cd Finlens-AI
 ```
 ### Step 3 — Create virtual environment
-python -m venv venv
 
+```bash
+python -m venv venv
+```
 Step 4 — Activate virtual environment
 
 On Windows (Command Prompt):
 
+```bash
 venv\Scripts\activate
-
+```
 On Windows (PowerShell):
-
+```bash
 venv\Scripts\Activate.ps1
-
+```
 On macOS/Linux:
-
+```bash
 source venv/bin/activate
-
+```
 After activation, you should see (venv) in your terminal.
 
 ### Step 4 — Install all dependencies from terminal
