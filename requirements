@@ -1,0 +1,11 @@
+PyMuPDF
+pdfplumber
+camelot-py[cv]
+opencv-python
+pandas
+matplotlib
+fastapi
+uvicorn
+python-multipart
+transformers
+torch
