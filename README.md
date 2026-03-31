@@ -1,17 +1,20 @@
-# Finlens-AI
+# FinLens AI
 
-A Python-based pipeline that reads financial PDF reports and extracts key figures like revenue, net income, EPS, and gross profit. It also comes with a web interface where you can upload a PDF and instantly see the results and charts on the page.
+A terminal-based Python pipeline that reads financial PDF reports and extracts key figures like revenue, net income, EPS, and gross profit. Every single step of this project — from setup to execution — runs entirely from the command line. No GUI, no manual configuration, no clicking through installers.
 
 Built as part of my Computer Vision course (CSE3010) at VIT Bhopal.
 
 ---
 
-## What it does
+## Important — This project is fully terminal-based
 
-- Takes a financial PDF (annual report, 10-K, etc.) as input
-- Extracts all text and tables from it
-- Finds financial figures using pattern matching
-- Shows results on a web dashboard with charts and a PDF preview
+Every step in this project is run from the terminal:
+- Dependency installation → terminal
+- PDF extraction pipeline → terminal
+- Web server → terminal
+- Dashboard generation → terminal
+
+No GUI setup is required at any point.
 
 ---
 
@@ -19,11 +22,12 @@ Built as part of my Computer Vision course (CSE3010) at VIT Bhopal.
 
 ```
 cv project/
-├── main.py            → runs the full extraction pipeline from terminal
-├── app.py             → FastAPI web server
-├── dashboard.py       → generates a matplotlib chart from extracted data
+├── main.py            → terminal pipeline — run this first
+├── app.py             → web server started from terminal
+├── dashboard.py       → chart generator run from terminal
+├── requirements.txt   → all dependencies
 ├── data/              → put your input PDF here
-├── output/            → extracted JSON and images saved here
+├── output/            → results saved here automatically
 └── webpage/
     ├── index.html
     ├── style.css
@@ -32,60 +36,83 @@ cv project/
 
 ---
 
-## Setup
+## Setup — Everything from terminal
 
-### 1. Make sure Python is installed
+### Step 1 — Check Python version
 
-This project needs Python 3.10 or above. Check your version:
+Open your terminal and run:
 
 ```bash
 python --version
 ```
 
-Download from https://python.org if needed.
+You need Python 3.10 or above. Download from https://python.org if needed.
 
-### 2. Clone the repository
+### Step 2 — Clone the repository
 
 ```bash
 git clone https://github.com/Vidhan8617/Finlens-AI.git
 cd Finlens-AI
 ```
 
-### 3. Install dependencies
+### Step 3 — Install all dependencies from terminal
 
 ```bash
 pip install -r requirements.txt
 ```
 
-If you run into issues with camelot, also run:
+If camelot throws an error, also run:
 
 ```bash
 pip install camelot-py[cv] opencv-python
 ```
 
+No other setup needed. Everything is now ready to run from the terminal.
+
 ---
 
 ## Running the project
 
-### Option A — Terminal pipeline (no browser needed)
+This project has two fully terminal-based execution modes.
 
-Put your PDF inside the `data/` folder and rename it `annual_report.pdf`, then run:
+---
+
+### Mode 1 — Pure terminal pipeline (no browser at all)
+
+Get a sample annual report PDF from SEC EDGAR:
+```
+https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=AAPL&type=10-K
+```
+
+Or download directly from terminal:
+```bash
+curl -L -o data/annual_report.pdf "https://stocklight.com/stocks/us/nasdaq-aapl/apple/annual-reports/nasdaq-aapl-2024-10K-241416806.pdf"
+```
+
+Then run the extraction pipeline from terminal:
 
 ```bash
 python main.py
 ```
 
-Output will be saved to `output/financial_data.json` and page images to `output/images/`.
+This will:
+- Load the PDF and save each page as an image to `output/images/`
+- Extract all text from every page
+- Find and save tables to `output/tables/`
+- Extract financial figures (revenue, net income, EPS, gross profit)
+- Save everything to `output/financial_data.json`
 
-To generate a chart from the extracted data:
+To generate a chart from the extracted data, run from terminal:
 
 ```bash
 python dashboard.py
 ```
 
-### Option B — Web interface
+---
 
-Start the server:
+### Mode 2 — Web interface (also started from terminal)
+
+Start the server from terminal:
 
 ```bash
 python -m uvicorn app:app --reload
@@ -97,20 +124,22 @@ Open your browser and go to:
 http://localhost:8000
 ```
 
-Upload any financial PDF and the results will appear on the page directly — no manual steps needed.
+From the browser you can upload any PDF directly — no need to copy files into any folder manually. The entire backend runs from the terminal command above.
+
+To stop the server, press `Ctrl + C` in the terminal.
 
 ---
 
 ## Output
 
-After running, you get:
+After running either mode, you get:
 
-- `output/financial_data.json` — structured financial data
-- `output/images/` — each PDF page as a PNG
-- `output/tables/` — any detected tables saved as CSV
+- `output/financial_data.json` — structured extracted data
+- `output/images/` — each PDF page saved as PNG
+- `output/tables/` — detected tables saved as CSV files
 - A visual dashboard with bar and pie charts
 
-Sample JSON output:
+Sample `financial_data.json`:
 
 ```json
 {
@@ -128,14 +157,21 @@ Sample JSON output:
 
 ## Dependencies
 
-All listed in `requirements.txt`. Main ones:
+Install all of these in one terminal command using `pip install -r requirements.txt`:
 
-- `PyMuPDF` — PDF loading and page rendering
-- `pdfplumber` — text extraction
-- `camelot-py` — table extraction
-- `pandas` — data handling
-- `matplotlib` — chart generation
-- `fastapi` + `uvicorn` — web server
+| Package | Purpose |
+|---|---|
+| `PyMuPDF` | PDF loading and page-to-image conversion |
+| `pdfplumber` | Text extraction from PDF pages |
+| `camelot-py[cv]` | Table extraction from PDFs |
+| `opencv-python` | Required by camelot |
+| `pandas` | Data handling |
+| `matplotlib` | Chart and dashboard generation |
+| `fastapi` | Web server backend |
+| `uvicorn` | Running the FastAPI server from terminal |
+| `python-multipart` | Handling PDF uploads in FastAPI |
+| `transformers` | FinBERT AI model support |
+| `torch` | Required to run transformers |
 
 ---
 
