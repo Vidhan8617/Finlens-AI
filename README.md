@@ -1,8 +1,8 @@
 # FinLens AI
 
-A terminal-based Python pipeline that reads financial PDF reports and extracts key figures like revenue, net income, EPS, and gross profit. Every single step of this project — from setup to execution — runs entirely from the command line. No GUI, no manual configuration, no clicking through installers.
+A terminal-based Python pipeline that reads financial PDF reports and extracts key figures like revenue, net income, EPS, and gross profit. Every single step of this project from setup to execution runs entirely from the command line. No GUI, no manual configuration, no clicking through installers.
 
-Built as part of my Computer Vision course (CSE3010) at VIT Bhopal.
+This Project is built as part of my Computer Vision course (CSE3010) at VIT Bhopal.
 
 ---
 
@@ -77,17 +77,30 @@ This project has two fully terminal-based execution modes.
 
 ---
 
-### Mode 1 — Pure terminal pipeline (no browser at all)
+### Mode 1 — Web interface 
 
-Get a sample annual report PDF from SEC EDGAR:
-```
-https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=AAPL&type=10-K
-```
+Start the server from terminal:
 
-Or download directly from terminal:
 ```bash
-curl -L -o data/annual_report.pdf "https://stocklight.com/stocks/us/nasdaq-aapl/apple/annual-reports/nasdaq-aapl-2024-10K-241416806.pdf"
+python -m uvicorn app:app --reload
 ```
+
+You can click on url printed in terminal using Ctrl+Click
+or 
+Open your browser and go to:
+
+```
+http://localhost:8000
+```
+
+From the browser you can upload any PDF directly — no need to copy files into any folder manually. The entire backend runs from the terminal command above.
+You can also upload the pdf which is present in data folder named "annual report.pdf"
+
+To stop the server, press `Ctrl + C` in the terminal.
+
+---
+
+### Mode 2 — To verify already uploaded report
 
 Then run the extraction pipeline from terminal:
 
@@ -110,25 +123,7 @@ python dashboard.py
 
 ---
 
-### Mode 2 — Web interface (also started from terminal)
 
-Start the server from terminal:
-
-```bash
-python -m uvicorn app:app --reload
-```
-
-Open your browser and go to:
-
-```
-http://localhost:8000
-```
-
-From the browser you can upload any PDF directly — no need to copy files into any folder manually. The entire backend runs from the terminal command above.
-
-To stop the server, press `Ctrl + C` in the terminal.
-
----
 
 ## Output
 
@@ -179,9 +174,9 @@ Install all of these in one terminal command using `pip install -r requirements.
 
 | Field | Details |
 |---|---|
+| Student | Vidhan Ayachit |
+| Reg No | 23BAI10233 
 | Course | Computer Vision |
 | Course Code | CSE3010 |
 | Faculty | Dr. Amrita Parashar |
 | University | VIT Bhopal |
-| Student | Vidhan Ayachit |
-| Reg No | 23BAI10233 |
