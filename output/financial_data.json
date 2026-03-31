@@ -1,8 +1,9 @@
 {
   "source_file": "data/annual_report.pdf",
-  "extracted_at": "2026-03-28T20:05:07.875498",
+  "extracted_at": "2026-03-31T16:40:11.661009",
   "financial_figures": {
     "net_income": 72361.0,
+    "gross_profit": 146052.0,
     "eps": 9.68
   },
   "tables_found": 0
